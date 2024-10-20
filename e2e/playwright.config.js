@@ -1,10 +1,10 @@
 const config = {
-    use: {
-        baseURL: 'https://jsonplaceholder.typicode.com',
-        extraHTTPHeaders: {
-            'Content-type': 'application/json',
-        }
+  use: {
+    baseURL: 'https://jsonplaceholder.typicode.com',
+    extraHTTPHeaders: {
+      'Content-type': 'application/json',
     }
+  }
 };
 
-module.exports = config;
+export default config;

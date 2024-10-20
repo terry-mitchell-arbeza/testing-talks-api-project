@@ -1,2 +1,13 @@
 node_modules
 playwright-report
+
+# Ignore all files in the .idea folder
+.idea/*
+
+# Except for these files
+!.idea/codeStyles
+!.idea/inspectionProfiles
+!.idea/libraries
+!.idea/misc.xml
+!.idea/modules.xml
+!.idea/vcs.xml
