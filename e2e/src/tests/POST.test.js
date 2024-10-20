@@ -1,4 +1,4 @@
-import {expect, test} from '@playwright/test';
+import {expect, test} from '@playwright/test'
 
 test('create user post', async ({request}) => {
   const response = await request.post('/posts', {
@@ -7,9 +7,9 @@ test('create user post', async ({request}) => {
       title: 'New Post',
       body: 'This is a new post',
     },
-  });
-  expect(response.ok()).toBeTruthy();
-  expect(response.status()).toBe(201);
+  })
+  expect(response.ok()).toBeTruthy()
+  expect(response.status()).toBe(201)
   expect(await response.json()).toEqual((expect.objectContaining({
     'title': 'New Post',
     'body': 'This is a new post',
@@ -17,5 +17,5 @@ test('create user post', async ({request}) => {
     'id': 101
   }
   )
-  ));
-});
+  ))
+})

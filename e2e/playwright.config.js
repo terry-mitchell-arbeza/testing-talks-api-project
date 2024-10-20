@@ -5,6 +5,7 @@ const config = {
       'Content-type': 'application/json',
     }
   }
-};
+}
 
-export default config;
+
+export default config
