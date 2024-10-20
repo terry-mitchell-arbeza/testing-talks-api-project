@@ -18,3 +18,20 @@ export const getResponse = async (
   return response
 
 }
+
+export const deleteResponse = async (
+  request: APIRequestContext,
+  route: string,
+  globalConfig: GlobalConfig,
+  globalAPIResponseVariables: GlobalAPIResponseVariables
+): Promise<APIResponse> => {
+
+  const url = retireveHostURL(globalConfig)
+
+  const response = await request.delete(`${url}${route}`)
+
+  globalAPIResponseVariables.response = response
+
+  return response
+
+}
