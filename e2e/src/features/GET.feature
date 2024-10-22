@@ -13,7 +13,7 @@ Feature: As an API I can retrieve posts
     Given I retrieve the 1st "posts"
     And the response was successful
     Then the response status code is 200
-    And the response contains the attributes:
+    And the response data contains the attributes:
       | userId | 1 |
       | id     | 1 |
 

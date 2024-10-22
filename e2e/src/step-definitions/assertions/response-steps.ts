@@ -3,57 +3,78 @@ import { ScenarioWorld } from '../setup/world'
 import {expect} from '@playwright/test'
 
 Then(
-  /^the response was (successful)?(unsuccessful)?$/,
-  async function (this: ScenarioWorld, successful: string, unsuccessful: string) {
-    const {
-      globalAPIResponseVariables
-    } = this
+    /^the response was (successful)?(unsuccessful)?$/,
+    async function (this: ScenarioWorld, successful: string, unsuccessful: string) {
+        const {
+            globalAPIResponseVariables
+        } = this
 
-    console.log(`the response was ${successful ? 'successful': 'unsuccessful'}`)
+        console.log(`the response was ${successful ? 'successful': 'unsuccessful'}`)
 
-    const response = globalAPIResponseVariables.response
+        const response = globalAPIResponseVariables.response
 
-    if(unsuccessful) {
-      expect(response.ok()).toBeFalsy()
-    } else {
-      expect(response.ok()).toBeTruthy()
+        if(unsuccessful) {
+            expect(response.ok()).toBeFalsy()
+        } else {
+            expect(response.ok()).toBeTruthy()
+        }
     }
-  }
 )
 
 Then(
-  /^the response status code is (\d+)$/,
-  async function (this: ScenarioWorld, statusCode: number) {
-    const {
-      globalAPIResponseVariables
-    } = this
+    /^the response status code is (\d+)$/,
+    async function (this: ScenarioWorld, statusCode: number) {
+        const {
+            globalAPIResponseVariables
+        } = this
 
-    console.log(`the response status code is ${statusCode}`)
+        console.log(`the response status code is ${statusCode}`)
 
-    const response = globalAPIResponseVariables.response
+        const response = globalAPIResponseVariables.response
 
-    expect(response.status()).toBe(statusCode)
-  }
+        expect(response.status()).toBe(statusCode)
+    }
 )
 
 Then(
-  /^the response contains the attributes:$/,
-  async function (this: ScenarioWorld, dataTable: DataTable) {
-    const {
-      globalAPIResponseVariables
-    } = this
+    /^the response data contains the attributes:$/,
+    async function (this: ScenarioWorld, dataTable: DataTable) {
+        const {
+            globalAPIResponseVariables
+        } = this
 
-    console.log(`the response contains the attributes: ${dataTable.raw()}`)
+        console.log(`the response contains the attributes: ${dataTable.raw()}`)
 
-    const response = await globalAPIResponseVariables.response.json()
+        const response = await globalAPIResponseVariables.response.json()
 
-    const expectedResponse = dataTable.raw()
+        const expectedResponse = dataTable.raw()
 
-    for(let i = 0; i < expectedResponse.length; i++) {
-      const key = expectedResponse[i][0]
-      const value = expectedResponse[i][1]
-      expect(response[key]?.toString()).toBe(value)
+        for(let i = 0; i < expectedResponse.length; i++) {
+            const key = expectedResponse[i][0]
+            const value = expectedResponse[i][1]
+            expect(response[key]?.toString()).toBe(value)
+        }
+
     }
+)
 
-  }
+Then(
+    /^the response text contains the attributes:$/,
+    async function (this: ScenarioWorld, dataTable: DataTable) {
+        const {
+            globalAPIResponseVariables
+        } = this
+
+        console.log(`the response text contains the attributes: ${dataTable.raw()}`)
+
+        const response = await globalAPIResponseVariables.response.text()
+
+        const expectedResponse = dataTable.raw()
+
+        for(let i = 0; i < expectedResponse.length; i++) {
+            const value = expectedResponse[i][0]
+            expect(response).toContain(value)
+        }
+
+    }
 )

@@ -8,37 +8,37 @@ export type Api = {
 
 export class ScenarioWorld extends World {
 
-  constructor(options: IWorldOptions) {
-    super(options)
+    constructor(options: IWorldOptions) {
+        super(options)
 
-    this.globalAPIResponseVariables = {}
-    this.globalConfig = options.parameters as GlobalConfig
-  }
+        this.globalAPIResponseVariables = {}
+        this.globalConfig = options.parameters as GlobalConfig
+    }
 
-  globalConfig: GlobalConfig
+    globalConfig: GlobalConfig
 
-  globalAPIResponseVariables: GlobalAPIResponseVariables
+    globalAPIResponseVariables: GlobalAPIResponseVariables
 
-  api!: Api;
+    api!: Api;
 
   [key: string]: any;
 
   async init(): Promise<Api> {
-    const request = await this.newRequest()
+      const request = await this.newRequest()
 
-    this.api = {
-      request
-    }
+      this.api = {
+          request
+      }
 
-    return this.api
+      return this.api
   }
 
   private newRequest = async (): Promise<APIRequestContext> => {
-    return await playwright.request.newContext({
-      extraHTTPHeaders: {
-        'Content-Type': 'application/json'
-      }
-    })
+      return await playwright.request.newContext({
+          extraHTTPHeaders: {
+              'Content-Type': 'application/json'
+          }
+      })
   }
 }
 
